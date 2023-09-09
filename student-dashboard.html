@@ -35,7 +35,57 @@
     }
   </style>
 </head>
+<html>
+<head>
+    <title>User Profile</title>
+    <style>
+        /* Profile styling */
+        #user-profile {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
 <body>
+    <div id="user-profile">
+        <h2>User : <span id="profile-name">User</span></h2>
+    </div>
+
+    <script>
+        // Function to get a cookie by name
+        function getCookie(name) {
+            const cookieName = `${name}=`;
+            const decodedCookie = decodeURIComponent(document.cookie);
+            const cookieArray = decodedCookie.split(';');
+            
+            for (let i = 0; i < cookieArray.length; i++) {
+                let cookie = cookieArray[i].trim();
+                if (cookie.indexOf(cookieName) === 0) {
+                    return cookie.substring(cookieName.length, cookie.length);
+                }
+            }
+            
+            return "";
+        }
+
+        // Get the user's profile name from the cookie
+        const storedName = getCookie("profileName");
+        if (storedName !== "") {
+            // Update the profile name in the HTML
+            const profileNameElement = document.getElementById("profile-name");
+            profileNameElement.textContent = storedName;
+        }
+    </script>
+</body>
+</html>
+
+  <body>
   <div id="header">
     <h1>Penguin Learning | Student Dashboard</h1>
   </div>
