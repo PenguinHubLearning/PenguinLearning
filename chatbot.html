@@ -1,0 +1,90 @@
+<html>
+<head>
+  <title>Penguin Hub | Chatbot</title>
+<style>
+body {
+background-color: #222;
+color: #fff;
+font-family: Arial, sans-serif;
+}
+
+#chat-container {
+width: 300px;
+margin: 0 auto;
+padding: 20px;
+border: 1px solid #333;
+border-radius: 5px;
+background-color: #333;
+}
+
+#chat-box {
+height: 300px;
+overflow-y: scroll;
+border: 1px solid #333;
+padding: 10px;
+background-color: #444;
+}
+
+#user-input {
+width: 100%;
+padding: 10px;
+border: 1px solid #333;
+background-color: #444;
+color: #fff;
+}
+
+.user {
+text-align: right;
+margin-bottom: 5px;
+}
+
+.bot {
+text-align: left;
+margin-bottom: 5px;
+}
+</style>
+</head>
+<body>
+<div id="chat-container">
+<div id="chat-box">
+<p>Penguin Hub Bot : How Can I Help You? I Only Have Enough Knowlege To Help You With The English Stories!</p>
+</div>
+<input type="text" id="user-input" placeholder="Type your message...">
+</div>
+
+<script>
+const chatBox = document.getElementById("chat-box");
+const userInput = document.getElementById("user-input");
+
+function appendMessage(message, sender) {
+const messageElement = document.createElement("div");
+messageElement.classList.add(sender);
+messageElement.textContent = message;
+chatBox.appendChild(messageElement);
+}
+
+function botResponse(userMessage) {
+const responses = {
+"hello": "Hello! How can I help you?",
+"how are you": "I'm doing good! Thanks for asking! If you have any questions with a lesson just ask me!",
+"i need help with alice and the hole": "Ok, I see you need help with the story Alice And The Hole... Lets Work It Out! The question says... 1. Which way should Alice go? So we need to find out which way Alice should go. Would it be A? Go to the queens castle? No! She doesn't need to go to the castle. So we can mark A out! Could it be B? Nope! Because Alice is already inside the hole! Could it be C? Yes! She needs to ask the cat for help! I hoped this helped!",
+"i need help with year 2042": "Ok I see you need help with the story Year 2042! I'll gladly help you with it! So in the story Year 2042... The question is 1. What was the most important lesson that Anya learned from her journey to rebuild the world? Lets work this out! Could it be A? Lets see... the question says That one person can make a difference. It would be A. Because the question says 1. What was the most important lesson that Anya learned from her journey to rebuild the world? Thats what can happen if that 1 person tries!",
+"bye": "Goodbye! Have a great day!"
+};
+
+const response = responses[userMessage.toLowerCase()] || "I'm sorry, I don't understand that.";
+
+appendMessage(response, "bot");
+}
+
+userInput.addEventListener("keyup", function(event) {
+if (event.key === "Enter") {
+const userMessage = userInput.value;
+appendMessage(userMessage, "user");
+botResponse(userMessage);
+userInput.value = "";
+}
+});
+</script>
+</body>
+</html>
