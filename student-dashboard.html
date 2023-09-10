@@ -94,6 +94,70 @@
     <p>Press A Button Bellow Me To Start A Lesson!</p>
     <a href="/thecat.html" class="button">Alice And The Hole</a>
     <a href="/year-2042.html" class="button">Year 2042</a>
+        <style>
+        body {
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .card {
+            width: 300px;
+            background-color: #fff;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .card:active {
+            transform: translateY(5px);
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .card h2 {
+            font-size: 1.5rem;
+            color: #009688;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        /* Added a hover effect for the link text */
+        .card a {
+            text-decoration: none;
+            color: #009688;
+            font-weight: bold;
+            transition: color 0.2s ease-in-out;
+        }
+
+        .card a:hover {
+            color: #00796b;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://www.example.com" target="_blank">
+        <div class="card">
+          <h2>Alice And The Hole</h2>
+          <p>This card will take you to the story</p>
+            <p>Click <a href="https://www.penguinhub.buzz/thecat.html" target="_blank">here</a> to read the story</p>
+        </div>
+    </a>
         <h2>Vocabulary Lessons</h2>
         <a href="/vocab-1.html" class="button">First 5 Words</a>
   </div>
