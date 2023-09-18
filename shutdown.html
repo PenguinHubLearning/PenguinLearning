@@ -1,24 +1,49 @@
 <!DOCTYPE html>
 <html>
-<title>Penguin Hub Temp Closed</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<head>
+  <title>My Browser</title>
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+
+    #address-bar {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid black;
+    }
+
+    #content {
+      margin-top: 20px;
+    }
+  </style>
+</head>
 <body>
+  <input type="text" id="address-bar" placeholder="Enter a URL">
+  <div id="content"></div>
 
-<div class="w3-container">
-  <h2>Penguin Hub</h2>
-  <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black">Why Is The Site Locked?</button>
+  <script>
+    // Get the address bar element.
+    const addressBar = document.getElementById('address-bar');
 
-  <div id="id01" class="w3-modal">
-    <div class="w3-modal-content">
-      <div class="w3-container">
-        <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-        <h1>Penguin Hub : Closing Temp</h1>
-        <p>Thank You For Using Penguin Learning As. A Learning Site! But We Are Shutting Down. Thank You! It Was So Much Fun Working With Yall! The Reason To This Is That We Are Remaking The Site! Hope To See Yall Soon!</p>
-      </div>
-    </div>
-  </div>
-</div>
-            
+    // Get the content element.
+    const content = document.getElementById('content');
+
+    // Listen for the enter key to be pressed in the address bar.
+    addressBar.addEventListener('keyup', function(event) {
+      if (event.keyCode === 13) {
+        // Get the URL from the address bar.
+        const url = addressBar.value;
+
+        // Fetch the HTML content of the URL.
+        fetch(url)
+          .then(response => response.text())
+          .then(html => {
+            // Set the content of the content element to the HTML.
+            content.innerHTML = html;
+          });
+      }
+    });
+  </script>
 </body>
 </html>
