@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>My Browser</title>
+  <title>Simple Web Browser</title>
   <style>
     body {
       font-family: sans-serif;
@@ -13,36 +13,29 @@
       border: 1px solid black;
     }
 
-    #content {
-      margin-top: 20px;
+    #iframe {
+      width: 100%;
+      height: 500px;
+      border: 1px solid black;
     }
   </style>
 </head>
 <body>
+  <h1>Simple Web Browser</h1>
+
   <input type="text" id="address-bar" placeholder="Enter a URL">
-  <div id="content"></div>
+  <button type="button" id="load-page">Load Page</button>
+
+  <iframe id="iframe"></iframe>
 
   <script>
-    // Get the address bar element.
-    const addressBar = document.getElementById('address-bar');
+    const addressBar = document.getElementById("address-bar");
+    const loadButton = document.getElementById("load-page");
+    const iframe = document.getElementById("iframe");
 
-    // Get the content element.
-    const content = document.getElementById('content');
-
-    // Listen for the enter key to be pressed in the address bar.
-    addressBar.addEventListener('keyup', function(event) {
-      if (event.keyCode === 13) {
-        // Get the URL from the address bar.
-        const url = addressBar.value;
-
-        // Fetch the HTML content of the URL.
-        fetch(url)
-          .then(response => response.text())
-          .then(html => {
-            // Set the content of the content element to the HTML.
-            content.innerHTML = html;
-          });
-      }
+    loadButton.addEventListener("click", () => {
+      const url = addressBar.value;
+      iframe.src = url;
     });
   </script>
 </body>
