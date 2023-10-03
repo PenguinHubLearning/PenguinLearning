@@ -13,7 +13,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh; /* Full-screen height */
         }
 
         .container {
@@ -72,9 +72,11 @@
 </head>
 <body>
     <div class="container">
+        <h1>PenguinHub API Endpoints</h1>
         <div class="card">
             <h2 class="endpoint-title">/question</h2>
-          <p class="endpoint-description">Get A Question From This Endpoint!</p>            <button class="copy-button" data-clipboard-text="https://ccp.apiv10b.repl.co/question">Copy</button>
+            <p class="endpoint-description">Get A Question From This Endpoint!</p>
+            <button class="copy-button" data-clipboard-text="https://ccp.apiv10b.repl.co/question">Copy</button>
         </div>
         <div class="card">
             <h2 class="endpoint-title">/qotd</h2>
