@@ -13,7 +13,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh; /* Full-screen height */
+            height: 100vh;
         }
 
         .container {
@@ -68,6 +68,40 @@
         .copy-button:hover {
             background-color: #0090e9;
         }
+
+        /* Custom popup styles */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+        }
+
+        /* Overlay for the popup */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+        }
+
+        /* Button to close the popup */
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -91,13 +125,41 @@
         <!-- Add more cards as needed -->
     </div>
 
+    <!-- Custom popup HTML -->
+    <div class="overlay" id="popup-overlay"></div>
+    <div class="popup" id="popup">
+        <span class="close-button" id="close-popup">×</span>
+        <p>URL copied to clipboard:</p>
+        <textarea id="copied-url" readonly></textarea>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
     <script>
         var clipboard = new ClipboardJS('.copy-button');
 
         clipboard.on('success', function(e) {
+            var copiedUrl = e.text;
+            document.getElementById('copied-url').value = copiedUrl;
+
+            // Show the custom popup
+            var popup = document.getElementById('popup');
+            var overlay = document.getElementById('popup-overlay');
+            popup.style.display = 'block';
+            overlay.style.display = 'block';
+
+            // Close the popup when the close button is clicked
+            document.getElementById('close-popup').addEventListener('click', function() {
+                popup.style.display = 'none';
+                overlay.style.display = 'none';
+            });
+
+            // Automatically close the popup after 3 seconds
+            setTimeout(function() {
+                popup.style.display = 'none';
+                overlay.style.display = 'none';
+            }, 3000);
+
             e.clearSelection();
-            alert('Copied to clipboard: ' + e.text);
         });
 
         clipboard.on('error', function(e) {
