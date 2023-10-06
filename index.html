@@ -3,168 +3,324 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PenguinHub API Endpoints</title>
+    <title>iPad Standby Site</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #8a2be2; /* Purple background */
-            margin: 0;
-            padding: 0;
+            background-color: #000;
+            color: #fff;
+            font-family: "Helvetica Neue", sans-serif;
             display: flex;
-            justify-content: center;
+            flex-direction: row;
+            justify-content: space-between;
             align-items: center;
             height: 100vh;
+            margin: 0;
+            padding: 20px;
         }
 
-        .container {
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-            width: 80%;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .card {
-            background-color: #f2f2f2;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 20px 0;
-            transition: transform 0.3s;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        .content {
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: flex-start;
+            margin-right: 20px;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .endpoint-title {
+        .element {
             font-size: 24px;
-            font-weight: bold;
             margin-bottom: 10px;
+            animation: fadein 3s;
         }
 
-        .endpoint-description {
-            font-size: 18px;
+        .element.large {
+            font-size: 36px;
+        }
+
+        #clock {
+            font-size: 72px;
             margin-bottom: 20px;
+            animation: fadein 3s;
         }
 
-        .copy-button {
-            background-color: #00bfff;
+        .button {
+            background-color: #007AFF;
             color: #fff;
+            padding: 10px 20px;
+            font-size: 18px;
             border: none;
-            padding: 10px 16px;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s;
-            font-size: 16px;
+            transition: background-color 0.3s ease;
         }
 
-        .copy-button:hover {
-            background-color: #0090e9;
+        .button:hover {
+            background-color: #0056b3;
         }
 
-        /* Custom popup styles */
-        .popup {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-            z-index: 999;
-        }
-
-        /* Overlay for the popup */
-        .overlay {
+        .modal {
             display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 998;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
         }
 
-        /* Button to close the popup */
-        .close-button {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            cursor: pointer;
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
         }
+
+        .modal-button {
+            background-color: #007AFF;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .modal-button:hover {
+            background-color: #0056b3;
+        }
+
+        .image {
+            max-width: 100%;
+            margin-top: 20px;
+        }
+
+        /* Horizontal layout */
+        .horizontal-layout {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Customize the weather widget as needed */
+        .weather-widget {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 10px;
+            margin-right: 20px;
+        }
+
+        .weather-icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        /* Greeting Message */
+        #greeting {
+            font-size: 36px;
+            margin-bottom: 20px;
+            animation: fadein 3s;
+        }
+
+        /* Notifications */
+        #notification {
+            font-size: 24px;
+            margin-bottom: 10px;
+            animation: fadein 3s;
+        }
+
+        /* Reminders */
+        #reminder {
+            font-size: 24px;
+            margin-bottom: 10px;
+            animation: fadein 3s;
+        }
+
+        /* Music Player Status */
+        #music {
+            font-size: 24px;
+            margin-bottom: 10px;
+            animation: fadein 3s;
+        }
+
+        /* News Headlines */
+        #news {
+            font-size: 24px;
+            margin-bottom: 10px;
+            animation: fadein 3s;
+        }
+
+        /* Stocks */
+        #stocks {
+            font-size: 24px;
+            margin-bottom: 10px;
+            animation: fadein 3s;
+        }
+
+        /* Timer */
+        #timer {
+            font-size: 24px;
+            margin-bottom: 10px;
+            animation: fadein 3s;
+        }
+
+        /* Calendar Events */
+        #calendar-events {
+            font-size: 24px;
+            margin-bottom: 10px;
+            animation: fadein 3s;
+        }
+
+        /* Notes */
+        #notes {
+            font-size: 24px;
+            margin-bottom: 10px;
+            animation: fadein 3s;
+        }
+
+        /* Health */
+        #health {
+            font-size: 24px;
+            margin-bottom: 10px;
+            animation: fadein 3s;
+        }
+
+        /* Fitness */
+        #fitness {
+            font-size: 24px;
+            margin-bottom: 10px;
+            animation: fadein 3s;
+        }
+
+        /* Books */
+        #book {
+            font-size: 24px;
+            margin-bottom: 10px;
+            animation: fadein 3s;
+        }
+
+        /* TV Shows */
+        #tv {
+            font-size: 24px;
+            margin-bottom: 10px;
+            animation: fadein 3s;
+        }
+
+        /* Movies */
+        #movie {
+            font-size: 24px;
+            margin-bottom: 10px;
+            animation: fadein 3s;
+        }
+
+        @keyframes fadein {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Add more styles as needed for additional elements */
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>PenguinHub API Endpoints</h1>
-        <div class="card">
-            <h2 class="endpoint-title">/question</h2>
-            <p class="endpoint-description">Get A Question From This Endpoint! Made By : Filipp99</p>
-            <button class="copy-button" data-clipboard-text="https://ccp.apiv10b.repl.co/question">Copy</button>
+    <div class="horizontal-layout">
+        <div class="content">
+            <div class="element large" id="clock"></div>
+            <div class="element" id="calendar"></div>
+            <div class="element" id="greeting"></div>
+            <div class="element" id="rotating-text"></div>
+            <button class="button" id="alarm-button" onclick="openAlarmModal()">Set Alarm</button>
         </div>
-        <div class="card">
-            <h2 class="endpoint-title">/qotd</h2>
-            <p class="endpoint-description">Get The Question Of The Day! Made By : Filipp99</p>
-            <button class="copy-button" data-clipboard-text="https://ccp.apiv10b.repl.co/qotd">Copy</button>
+        <div class="weather-widget">
+            <div class="weather-icon">☀️ 72°F</div>
         </div>
-        <div class="card">
-            <h2 class="endpoint-title">/chatbot?message=</h2>
-            <p class="endpoint-description">Use ChatGPT API For FREE!</p>
-            <button class="copy-button" data-clipboard-text="https://penguai.esports-ac3.workers.dev/chatbot?message=Hello">Copy</button>
-        </div>
-        <!-- Add more cards as needed -->
     </div>
 
-    <!-- Custom popup HTML -->
-    <div class="overlay" id="popup-overlay"></div>
-    <div class="popup" id="popup">
-        <span class="close-button" id="close-popup">×</span>
-        <p>URL copied to clipboard:</p>
-        <textarea id="copied-url" readonly></textarea>
+    <!-- Modal for setting an alarm -->
+    <div id="alarm-modal" class="modal">
+        <div class="modal-content">
+            <h2>Set Alarm</h2>
+            <input type="time" id="alarm-time">
+            <button class="modal-button" onclick="setAlarm()">Set</button>
+            <button class="modal-button" onclick="closeAlarmModal()">Cancel</button>
+        </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
     <script>
-        var clipboard = new ClipboardJS('.copy-button');
+        // Greeting Message
+        function updateGreeting() {
+            const now = new Date();
+            const hours = now.getHours();
 
-        clipboard.on('success', function(e) {
-            var copiedUrl = e.text;
-            document.getElementById('copied-url').value = copiedUrl;
+            let greeting;
 
-            // Show the custom popup
-            var popup = document.getElementById('popup');
-            var overlay = document.getElementById('popup-overlay');
-            popup.style.display = 'block';
-            overlay.style.display = 'block';
+            if (hours < 12) {
+                greeting = 'Good morning';
+            } else if (hours < 18) {
+                greeting = 'Good afternoon';
+            } else {
+                greeting = 'Good evening';
+            }
 
-            // Close the popup when the close button is clicked
-            document.getElementById('close-popup').addEventListener('click', function() {
-                popup.style.display = 'none';
-                overlay.style.display = 'none';
-            });
+            document.getElementById('greeting').textContent = greeting;
+        }
 
-            // Automatically close the popup after 3 seconds
-            setTimeout(function() {
-                popup.style.display = 'none';
-                overlay.style.display = 'none';
-            }, 3000);
+        updateGreeting();
 
-            e.clearSelection();
-        });
+        // Clock
+        function updateClock() {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+        }
 
-        clipboard.on('error', function(e) {
-            alert('Error copying text to clipboard.');
-        });
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Calendar
+        function updateCalendar() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const formattedDate = now.toLocaleDateString('en-US', options);
+            document.getElementById('calendar').textContent = formattedDate;
+        }
+
+        updateCalendar();
+
+        // Rotating Text
+        const rotatingText = ['Hello', 'Welcome', 'iPad Standby Site'];
+        let currentIndex = 0;
+
+        function updateRotatingText() {
+            document.getElementById('rotating-text').textContent = rotatingText[currentIndex];
+            currentIndex = (currentIndex + 1) % rotatingText.length;
+        }
+
+        setInterval(updateRotatingText, 2000);
+        updateRotatingText();
+
+        // Alarm Modal Functions
+        function openAlarmModal() {
+            const modal = document.getElementById('alarm-modal');
+            modal.style.display = 'block';
+        }
+
+        function closeAlarmModal() {
+            const modal = document.getElementById('alarm-modal');
+            modal.style.display = 'none';
+        }
+
+        function setAlarm() {
+            const alarmTime = document.getElementById('alarm-time').value;
+            alert(`Alarm set for ${alarmTime}`);
+            closeAlarmModal();
+        }
     </script>
 </body>
 </html>
