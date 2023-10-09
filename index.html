@@ -3,323 +3,256 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iPad Standby Site</title>
+    <title>RealmAPI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
     <style>
-        body {
-            background-color: #000;
-            color: #fff;
-            font-family: "Helvetica Neue", sans-serif;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-            height: 100vh;
+        /* Reset some default styles */
+        * {
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .content {
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a; /* Realm-themed background color */
+            margin: 0;
+            padding: 0;
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
-            margin-right: 20px;
+            min-height: 100vh;
         }
 
-        .element {
-            font-size: 24px;
-            margin-bottom: 10px;
-            animation: fadein 3s;
-        }
-
-        .element.large {
-            font-size: 36px;
-        }
-
-        #clock {
-            font-size: 72px;
-            margin-bottom: 20px;
-            animation: fadein 3s;
-        }
-
-        .button {
-            background-color: #007AFF;
+        /* Header Styles */
+        .header {
+            background-color: #333; /* Dark header background */
             color: #fff;
-            padding: 10px 20px;
-            font-size: 18px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+            padding: 20px;
+            text-align: center;
         }
 
-        .button:hover {
+        .header h1 {
+            font-size: 2.5rem;
+        }
+
+        /* Container for Endpoint Cards */
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            flex-grow: 1;
+        }
+
+        /* Card Styles */
+        .endpoint-card {
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+            width: 300px;
+            margin: 20px;
+            transition: transform 0.2s;
+        }
+
+        .endpoint-card:hover {
+            transform: scale(1.05);
+        }
+
+        /* Header Styles for Cards */
+        .card-header {
+            background-color: #007bff; /* Realm-themed blue header */
+            color: #ffffff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        /* Content Styles for Cards */
+        .card-content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Button Styles for Cards */
+        .copy-button {
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .copy-button:hover {
             background-color: #0056b3;
         }
 
+        /* Copy Status Styles for Cards */
+        .copy-status {
+            text-align: center;
+            color: #007bff;
+            margin-top: 10px;
+        }
+
+        /* Slogan Styles */
+        .slogan {
+            background-color: #333; /* Dark slogan background */
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        /* Modal Styles */
         .modal {
             display: none;
             position: fixed;
-            top: 0;
+            z-index: 1;
             left: 0;
+            top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            justify-content: center;
-            align-items: center;
-            z-index: 1;
+            background-color: rgba(0, 0, 0, 0.5);
         }
 
         .modal-content {
             background-color: #fff;
+            border-radius: 8px;
+            text-align: left;
             padding: 20px;
-            border-radius: 10px;
-            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
 
-        .modal-button {
-            background-color: #007AFF;
-            color: #fff;
-            padding: 10px 20px;
-            font-size: 18px;
+        .close-button {
+            background-color: #007bff;
+            color: #ffffff;
             border: none;
-            border-radius: 5px;
+            border-radius: 4px;
+            padding: 10px 20px;
             cursor: pointer;
-            margin: 10px;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.2s;
+            margin-top: 10px;
+            float: right;
         }
 
-        .modal-button:hover {
+        .close-button:hover {
             background-color: #0056b3;
         }
-
-        .image {
-            max-width: 100%;
-            margin-top: 20px;
-        }
-
-        /* Horizontal layout */
-        .horizontal-layout {
-            display: flex;
-            align-items: center;
-        }
-
-        /* Customize the weather widget as needed */
-        .weather-widget {
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 10px;
-            border-radius: 10px;
-            margin-right: 20px;
-        }
-
-        .weather-icon {
-            font-size: 48px;
-            margin-bottom: 10px;
-        }
-
-        /* Greeting Message */
-        #greeting {
-            font-size: 36px;
-            margin-bottom: 20px;
-            animation: fadein 3s;
-        }
-
-        /* Notifications */
-        #notification {
-            font-size: 24px;
-            margin-bottom: 10px;
-            animation: fadein 3s;
-        }
-
-        /* Reminders */
-        #reminder {
-            font-size: 24px;
-            margin-bottom: 10px;
-            animation: fadein 3s;
-        }
-
-        /* Music Player Status */
-        #music {
-            font-size: 24px;
-            margin-bottom: 10px;
-            animation: fadein 3s;
-        }
-
-        /* News Headlines */
-        #news {
-            font-size: 24px;
-            margin-bottom: 10px;
-            animation: fadein 3s;
-        }
-
-        /* Stocks */
-        #stocks {
-            font-size: 24px;
-            margin-bottom: 10px;
-            animation: fadein 3s;
-        }
-
-        /* Timer */
-        #timer {
-            font-size: 24px;
-            margin-bottom: 10px;
-            animation: fadein 3s;
-        }
-
-        /* Calendar Events */
-        #calendar-events {
-            font-size: 24px;
-            margin-bottom: 10px;
-            animation: fadein 3s;
-        }
-
-        /* Notes */
-        #notes {
-            font-size: 24px;
-            margin-bottom: 10px;
-            animation: fadein 3s;
-        }
-
-        /* Health */
-        #health {
-            font-size: 24px;
-            margin-bottom: 10px;
-            animation: fadein 3s;
-        }
-
-        /* Fitness */
-        #fitness {
-            font-size: 24px;
-            margin-bottom: 10px;
-            animation: fadein 3s;
-        }
-
-        /* Books */
-        #book {
-            font-size: 24px;
-            margin-bottom: 10px;
-            animation: fadein 3s;
-        }
-
-        /* TV Shows */
-        #tv {
-            font-size: 24px;
-            margin-bottom: 10px;
-            animation: fadein 3s;
-        }
-
-        /* Movies */
-        #movie {
-            font-size: 24px;
-            margin-bottom: 10px;
-            animation: fadein 3s;
-        }
-
-        @keyframes fadein {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        /* Add more styles as needed for additional elements */
     </style>
 </head>
 <body>
-    <div class="horizontal-layout">
-        <div class="content">
-            <div class="element large" id="clock"></div>
-            <div class="element" id="calendar"></div>
-            <div class="element" id="greeting"></div>
-            <div class="element" id="rotating-text"></div>
-            <button class="button" id="alarm-button" onclick="openAlarmModal()">Set Alarm</button>
+    <div class="header">
+        <h1>RealmAPI</h1>
+    </div>
+
+    <div class="container">
+        <div class="endpoint-card">
+            <div class="card-header">
+                <h3>ChatGPT 4</h3>
+            </div>
+            <div class="card-content">
+                <p>Yall Know What This Is!</p>
+                <button class="copy-button" onclick="openCopyModal('https://chatgpt4.realmapi.workers.dev/chatbot?message=')">Copy</button>
+            </div>
         </div>
-        <div class="weather-widget">
-            <div class="weather-icon">☀️ 72°F</div>
+
+        <div class="endpoint-card">
+            <div class="card-header">
+                <h3>ChatGPT 3</h3>
+            </div>
+            <div class="card-content">
+                <p>Yall Know What This Is!</p>
+                <button class="copy-button" onclick="openCopyModal('https://chatgpt-3.realmapi.workers.dev/chat?q=')">Copy</button>
+            </div>
+        </div>
+        
+        <!-- Add more endpoint cards here -->
+        <!-- Endpoint 3 -->
+        <div class="endpoint-card">
+            <div class="card-header">
+                <h3>Llama2</h3>
+            </div>
+            <div class="card-content">
+                <p>Meta And Cloudflares AI!</p>
+                <button class="copy-button" onclick="openCopyModal('https://llama2.realmapi.workers.dev/chatbot?message=')">Copy</button>
+            </div>
+        </div>
+
+        <!-- Endpoint 4 -->
+        <div class="endpoint-card">
+            <div class="card-header">
+                <h3>Dall-e</h3>
+            </div>
+            <div class="card-content">
+                <p>Ever Want An Image Generation?</p>
+                <button class="copy-button" onclick="openCopyModal('https://dall-e.realmapi.workers.dev/generate?prompt=')">Copy</button>
+            </div>
+        </div>
+
+        <!-- Endpoint 5 -->
+        <div class="endpoint-card">
+            <div class="card-header">
+                <h3>Bard</h3>
+            </div>
+            <div class="card-content">
+                <p>Have Fun With Google Bard!</p>
+                <button class="copy-button" onclick="openCopyModal('https://google-bard.realmapi.workers.dev/chat?q=')">Copy</button>
+            </div>
+        </div>
+
+        <!-- Endpoint 6 -->
+        <div class="endpoint-card">
+            <div class="card-header">
+                <h3>DevGPT</h3>
+            </div>
+            <div class="card-content">
+                <p>Coding API For Your Use!</p>
+                <button class="copy-button" onclick="openCopyModal('https://devgpt.realmapi.workers.dev/chat?prompt=')">Copy</button>
+            </div>
         </div>
     </div>
 
-    <!-- Modal for setting an alarm -->
-    <div id="alarm-modal" class="modal">
+    <div class="slogan">
+        <p>Todays Requests : 70/15,000,000</p>
+    </div>
+
+    <!-- Modal for Copying -->
+    <div class="modal" id="copyModal">
         <div class="modal-content">
-            <h2>Set Alarm</h2>
-            <input type="time" id="alarm-time">
-            <button class="modal-button" onclick="setAlarm()">Set</button>
-            <button class="modal-button" onclick="closeAlarmModal()">Cancel</button>
+            <span class="close-button" onclick="closeCopyModal()">&times;</span>
+            <p id="copyText">Endpoint Copied to Clipboard!</p>
         </div>
     </div>
 
     <script>
-        // Greeting Message
-        function updateGreeting() {
-            const now = new Date();
-            const hours = now.getHours();
+        function openCopyModal(endpointName) {
+            const copyModal = document.getElementById('copyModal');
+            const copyText = document.getElementById('copyText');
+            copyText.textContent = `"${endpointName}" Copied to Clipboard!`;
+            copyModal.style.display = 'block';
 
-            let greeting;
+            setTimeout(function () {
+                copyModal.style.display = 'none';
+            }, 2000);
 
-            if (hours < 12) {
-                greeting = 'Good morning';
-            } else if (hours < 18) {
-                greeting = 'Good afternoon';
-            } else {
-                greeting = 'Good evening';
-            }
-
-            document.getElementById('greeting').textContent = greeting;
+            // Copy to clipboard
+            const copyTextElement = document.createElement('textarea');
+            copyTextElement.value = endpointName;
+            document.body.appendChild(copyTextElement);
+            copyTextElement.select();
+            document.execCommand('copy');
+            document.body.removeChild(copyTextElement);
         }
 
-        updateGreeting();
-
-        // Clock
-        function updateClock() {
-            const now = new Date();
-            const hours = now.getHours().toString().padStart(2, '0');
-            const minutes = now.getMinutes().toString().padStart(2, '0');
-            const seconds = now.getSeconds().toString().padStart(2, '0');
-            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
-        }
-
-        setInterval(updateClock, 1000);
-        updateClock();
-
-        // Calendar
-        function updateCalendar() {
-            const now = new Date();
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            const formattedDate = now.toLocaleDateString('en-US', options);
-            document.getElementById('calendar').textContent = formattedDate;
-        }
-
-        updateCalendar();
-
-        // Rotating Text
-        const rotatingText = ['Hello', 'Welcome', 'iPad Standby Site'];
-        let currentIndex = 0;
-
-        function updateRotatingText() {
-            document.getElementById('rotating-text').textContent = rotatingText[currentIndex];
-            currentIndex = (currentIndex + 1) % rotatingText.length;
-        }
-
-        setInterval(updateRotatingText, 2000);
-        updateRotatingText();
-
-        // Alarm Modal Functions
-        function openAlarmModal() {
-            const modal = document.getElementById('alarm-modal');
-            modal.style.display = 'block';
-        }
-
-        function closeAlarmModal() {
-            const modal = document.getElementById('alarm-modal');
-            modal.style.display = 'none';
-        }
-
-        function setAlarm() {
-            const alarmTime = document.getElementById('alarm-time').value;
-            alert(`Alarm set for ${alarmTime}`);
-            closeAlarmModal();
+        function closeCopyModal() {
+            const copyModal = document.getElementById('copyModal');
+            copyModal.style.display = 'none';
         }
     </script>
 </body>
