@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta property="og:title" content="PenguAPI">
+    <meta property="og:description" content="The only API you'll need">
+    <meta property="og:image" content="https://example.com/your-image.jpg"> <!-- Replace with your image URL -->
+    <meta property="og:url" content="https://www.penguapi.com"> <!-- Replace with your site URL -->
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@YourTwitterHandle"> <!-- Replace with your Twitter handle -->
+    <!-- Add any additional meta tags, CSS, or JavaScript links here as needed -->
+
+    <title>PenguAPI</title>
+    <!-- Add any additional meta tags, CSS, or JavaScript links here as needed -->
+</head>
+<body>
+    <!-- Your site's actual content goes here -->
+
+    <!-- Add any additional HTML elements and styles here as needed -->
+</body>
+</html>
